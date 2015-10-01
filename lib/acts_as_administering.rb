@@ -10,7 +10,7 @@ module ActsAsAdministering
 					true
 				end		
 				
-				define_method("administered_#{class_sym.to_s}") do 
+				define_method("administered_#{class_sym.to_s}") do |**options|
 					send "administers_#{class_sym.to_s}?"
 					@administered_things_ids = self
 						.send("owned_relationships_to_"+class_sym.to_s)

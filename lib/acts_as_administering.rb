@@ -1,6 +1,8 @@
 require "acts_as_administering/engine"
+require "acts_as_administrated_by"
 
 module ActsAsAdministering
+
 	def acts_as_administering(*classes_array)
 		class_eval do
 

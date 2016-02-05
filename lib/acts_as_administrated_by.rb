@@ -10,8 +10,8 @@ module ActsAsAdministratedBy
     end
 
     define_method("add_administrator_url") do 
-      @url = "#{self.class::APP_PROVIDER.url}/#{my_object_name.pluralize}/#{self.id}/add_administrator/#{@person.id}"
-      puts "in #{self.class}.#{__method__}, @url: #{@url}"
+      my_klass.url = "#{self.class::APP_PROVIDER.url}/#{my_object_name.pluralize}/#{self.id}/add_administrator/#{@person.id}"
+      puts "in #{self.class}.#{__method__}, url: #{url}"
       @url
     end
 
@@ -19,7 +19,7 @@ module ActsAsAdministratedBy
       @person = person
       if person.class.name == 'BigbeeGraph::Person'
         if self.class.name == "BigbeeAccounts::AppClient"
-          @caller = __method__.to_s
+          my_klass.called_by = __method__.to_s
           res = generic('post')
           puts "in #{self.class}.#{__method__}, res: #{res}" unless res.is_a?(String)
         else

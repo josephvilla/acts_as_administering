@@ -1,4 +1,7 @@
 source 'https://rubygems.org'
+source 'https://xxq_Rsz25NhhmsAReo_8@gem.fury.io/joseph-bigbee/' do
+end
+
 
 # Declare your gem's dependencies in acts_as_administering.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
@@ -13,6 +16,4 @@ gemspec
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
 
-gem 'acts_as_relating_to', 		'~> 0.0.1', 	git: 'git@github.com:josephvilla/acts_as_relating_to.git'
-gem 'acts_as_taggable_on'
-
+#gem 'acts_as_relating_to',     '~> 0.0.3',   git: 'git@github.com:josephvilla/acts_as_relating_to.git'

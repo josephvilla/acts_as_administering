@@ -7,14 +7,14 @@ module ActsAsAdministering
     include ActsAsAdministratingLocal
 
     def acts_as_administrating_simple(classes_array)
-      puts "in #{self}.#{__method__}, classes_array: #{classes_array}"
+      #puts "in #{self}.#{__method__}, classes_array: #{classes_array}"
       classes_array.each do |class_sym|
         acts_as_administrating_base class_sym
       end
     end
 
     def acts_as_administrating_optioned(spec)
-      puts "in #{self}.#{__method__}, spec: #{spec}"
+      #puts "in #{self}.#{__method__}, spec: #{spec}"
       class_sym = spec[0]
       options = spec.pop
       acts_as_administrating_base class_sym, options

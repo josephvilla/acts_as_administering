@@ -10,8 +10,7 @@ module ActsAsAdministering
             .all
             .map(&:in_relation_to_id)
           @administrated_things = thing_constant(class_sym).where(id: @administrated_things_ids)
-          @administrated_things.each{|t| puts "in #{self.class}.#{__method__}, t.inspect: #{t.inspect}"}
-          @administrated_things.all
+          #@administrated_things.all
         end
       end # administrated_things
 

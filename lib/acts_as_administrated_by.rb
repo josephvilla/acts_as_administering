@@ -19,6 +19,7 @@ module ActsAsAdministratedBy
       @person = person
       if person.class.name == 'BigbeeGraph::Person'
         if self.class.name == "BigbeeAccounts::AppClient"
+          my_klass.authenticate_with = {api_key: :in_headers}
           my_klass.called_by = __method__.to_s
           res = generic('post')
           puts "in #{self.class}.#{__method__}, res: #{res}" unless res.is_a?(String)

@@ -1,7 +1,7 @@
 module ActsAsAdministering
   module MethodBuilders
     module DefineAdministratedThingWith
-      def define_administrated_thing_with(class_sym)
+      def define_method_administrated_thing_with(class_sym)
         define_method("administrated_#{class_sym.to_s.singularize}_with") do |options|
           administrated_things = send "administrated_#{class_sym}"
           puts "in #{self}.#{__method__}, administrated_things: #{administrated_things}"

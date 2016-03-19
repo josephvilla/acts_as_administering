@@ -9,19 +9,13 @@ module ActsAsAdministratedBy
           @caller = __method__.to_s
           @person = person
           @options = options[self.to_s.demodulize.underscore.singularize]
-          #puts "in #{self}.#{__method__}, @person.inspect: #{@person.inspect}"
-          #puts "in #{self}.#{__method__}, @options: #{@options}"
           res = generic('get')
-          #puts "in #{self}.#{__method__}, res: #{res}" unless res.is_a?(String)
-          #puts "in #{self}.#{__method__}, something went wrong on the server" if res.is_a?(String)
-          #raise __method__.to_s
         end
       end
 
       def administrated_by_url
         @url = "#{self::APP_PROVIDER.url}/#{my_object_name.pluralize}/administrated_by/#{@person.id}"
         @url = @url + "?#{@options.to_query(self.to_s.demodulize.underscore.singularize)}" if @options
-        #puts @url
         @url
       end
 

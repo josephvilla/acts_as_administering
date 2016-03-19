@@ -11,8 +11,6 @@ module ActsAsAdministratedBy
 
     define_method("add_administrator_url") do 
       my_klass.url = "#{self.class::APP_PROVIDER.url}/#{my_object_name.pluralize}/#{self.id}/add_administrator/#{@person.id}"
-      puts "in #{self.class}.#{__method__}, url: #{url}"
-      @url
     end
 
     define_method("add_administrator") do |person|
@@ -22,7 +20,6 @@ module ActsAsAdministratedBy
           my_klass.authenticate_with = {api_key: :in_headers}
           my_klass.called_by = __method__.to_s
           res = generic('post')
-          puts "in #{self.class}.#{__method__}, res: #{res}" unless res.is_a?(String)
         else
           unless is_administrator?(person)
             r = ActsAsRelatingTo::Relationship.create(

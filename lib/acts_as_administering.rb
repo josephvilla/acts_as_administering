@@ -2,15 +2,18 @@ require "acts_as_administering/engine"
 require "acts_as_administrated_by"
 require "acts_as_administering/instance_methods"
 require "acts_as_administering/method_builders"
+require_dependency "acts_as_administering/define_methods"
 require_dependency "acts_as_administering/class_methods"
 
 module ActsAsAdministering
 
   def acts_as_administrating(*classes_array)
+    
     class_eval do
       include InstanceMethods
       extend  ClassMethods
       extend  MethodBuilders
+      extend  DefineMethods
     end     
 
     if is_array_of_keys? classes_array

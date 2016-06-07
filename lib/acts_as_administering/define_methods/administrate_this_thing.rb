@@ -10,6 +10,8 @@ module ActsAsAdministering
 
         define_method("administrate_this_#{singular}") do |thing|
           if thing.is_a?(expected_class)
+            puts "foo"
+            raise "foo!"
             raise "in #{my_klass}.#{__method__}, NOT IMPLEMENTED"
           else
             raise "in #{my_klass}.#{__method__}, expected a #{expected_class_name}, but got a #{thing.class.name}"

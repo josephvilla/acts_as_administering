@@ -20,6 +20,9 @@ module ActsAsAdministering
         end 
 
       end
+
+      private :define_method_administrate_this_thing_local
+      
     end
   end
 end

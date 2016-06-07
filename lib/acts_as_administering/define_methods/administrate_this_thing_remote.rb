@@ -23,6 +23,8 @@ module ActsAsAdministering
 
       end
 
+      private :define_method_administrate_this_thing_remote
+
     end
   end
 end

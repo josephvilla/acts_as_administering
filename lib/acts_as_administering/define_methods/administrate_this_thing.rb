@@ -3,24 +3,18 @@ module ActsAsAdministering
     module AdministrateThisThing
 
       def define_method_administrate_this_thing(class_sym, options={})
-        singular = class_sym.to_s.singularize
-        expected_class_name = options[:class_name]
-        expected_class_name ||= singular.camelize
-        expected_class = expected_class_name.constantize
 
-        define_method("administrate_this_#{singular}") do |thing|
-          if thing.is_a?(expected_class)
-            puts "foo"
-            raise "foo!"
-            raise "in #{my_klass}.#{__method__}, NOT IMPLEMENTED"
-          else
-            raise "in #{my_klass}.#{__method__}, expected a #{expected_class_name}, but got a #{thing.class.name}"
-          end
-        end 
+        unless options[:remote]
+          define_method_administrate_this_thing_local(class_sym, options)
+        else
+          define_method_administrate_thing_thing_remote(class_sym, options)
+        end
 
       end
 
-      private :define_method_administrate_this_thing
+      private :define_method_administrate_this_thing,
+              :define_method_administrate_this_thing_local,
+              :define_method_administrate_thing_thing_remote
 
     end
   end

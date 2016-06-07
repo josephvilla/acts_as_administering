@@ -6,6 +6,6 @@ module ActsAsAdministering
   module DefineMethods
     include AdministrateThisThing
     include AdministrateThisThingRemote
-
+    include AdministrateThisThingLocal
   end
 end

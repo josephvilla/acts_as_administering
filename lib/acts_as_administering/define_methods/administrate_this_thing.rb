@@ -1,3 +1,6 @@
+require_dependency 'acts_as_administering/define_methods/administrate_this_thing_local'
+require_dependency 'acts_as_administering/define_methods/administrate_this_thing_remote'
+
 module ActsAsAdministering
   module DefineMethods
     module AdministrateThisThing
@@ -7,7 +10,7 @@ module ActsAsAdministering
         unless options[:remote]
           define_method_administrate_this_thing_local(class_sym, options)
         else
-          define_method_administrate_thing_thing_remote(class_sym, options)
+          define_method_administrate_this_thing_remote(class_sym, options)
         end
 
       end

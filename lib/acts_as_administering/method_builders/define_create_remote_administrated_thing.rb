@@ -13,7 +13,7 @@ module ActsAsAdministering
         define_method("create_administrated_#{thing_object_name}") do |args|
           my_klass.called_by = "create_administrated_#{class_sym.to_s.singularize}"
           my_klass.query = args
-          res = HashWithIndifferentAccess.new(generic('post'))
+          res = generic('post').with_indifferent_access
           unless res[:errors]
             options[:class_name].constantize.new(res)
           else

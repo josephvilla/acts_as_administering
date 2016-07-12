@@ -14,11 +14,14 @@ module ActsAsAdministering
           my_klass.called_by = "create_administrated_#{class_sym.to_s.singularize}"
           my_klass.query = args
           res = generic('post').with_indifferent_access
+          options[:class_name].constantize.new(res)
+=begin          
           unless res[:errors]
             options[:class_name].constantize.new(res)
           else
             res
           end
+=end          
         end
       end
     end

@@ -15,8 +15,7 @@ module ActsAsAdministering
         define_method(method_name) do |thing|
           @thing = thing
           my_klass.called_by = method_name
-          remote_result = generic('put')
-          #puts "in #{my_klass}.#{__method__}, remote_result: #{remote_result}"
+          remote_result = generic('put').with_indifferent_access
           @thing = nil
           remote_result[:success] ? remote_result[:success] : remote_result[:errors]
         end

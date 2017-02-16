@@ -14,7 +14,7 @@ module ActsAsAdministratedBy
       end
 
       def administrated_by_url
-        @url = "#{self::APP_PROVIDER.url}/#{my_object_name.pluralize}/administrated_by/#{@person.id}"
+        @url = "#{my_klass.app_provider.url}/#{my_object_name.pluralize}/administrated_by/#{@person.id}"
         @url = @url + "?#{@options.to_query(self.to_s.demodulize.underscore.singularize)}" if @options
         @url
       end

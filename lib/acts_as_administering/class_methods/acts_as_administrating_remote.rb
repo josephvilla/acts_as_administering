@@ -8,7 +8,7 @@ module ActsAsAdministering
         define_create_remote_administrated_thing(class_sym, options)
 
         define_method("administrated_#{class_sym}_url") do
-          my_klass.url = "#{my_klass::APP_PROVIDER.url}/#{my_object_name.pluralize}/#{self.id}/administrated/#{class_sym.to_s.pluralize}"
+          my_klass.url = "#{my_klass.app_provider.url}/#{my_object_name.pluralize}/#{self.id}/administrated/#{class_sym.to_s.pluralize}"
           append_query("#{class_sym.to_s.singularize}")
         end
 

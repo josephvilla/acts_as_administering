@@ -6,7 +6,7 @@ module ActsAsAdministering
         thing_object_name = class_sym.to_s.singularize
 
         define_method("create_administrated_#{thing_object_name}_url") do
-          my_klass.url = "#{my_klass::APP_PROVIDER.url}/people/#{self.id}/administrated/#{thing_object_name.pluralize}"
+          my_klass.url = "#{my_klass.app_provider.url}/people/#{self.id}/administrated/#{thing_object_name.pluralize}"
           append_query
         end
 

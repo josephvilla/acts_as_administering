@@ -7,7 +7,7 @@ module ActsAsAdministering
 
         define_method("create_administrated_#{thing_object_name}_url") do
           my_klass.url = "#{my_klass.app_provider.url}/people/#{self.id}/administrated/#{thing_object_name.pluralize}"
-          append_query
+          append_query(thing_object_name)
         end
 
         define_method("create_administrated_#{thing_object_name}") do |args|
@@ -15,14 +15,8 @@ module ActsAsAdministering
           my_klass.query = args
           res = generic('post').with_indifferent_access
           options[:class_name].constantize.new(res)
-=begin          
-          unless res[:errors]
-            options[:class_name].constantize.new(res)
-          else
-            res
-          end
-=end          
         end
+
       end
     end
   end

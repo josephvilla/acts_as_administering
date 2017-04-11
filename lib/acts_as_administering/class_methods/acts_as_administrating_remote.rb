@@ -16,7 +16,6 @@ module ActsAsAdministering
           my_klass.called_by = "administrated_#{class_sym.to_s}"
           my_klass.query = args unless args.empty?
           res = generic('get')
-          #puts "in #{my_klass}.#{__method__}, res: #{res}"
           if res.is_a?(Array)
             return_klass = options[:class_name].constantize
             return_array = []

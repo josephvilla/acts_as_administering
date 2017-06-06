@@ -3,10 +3,8 @@ module ActsAsAdministering
     module AdministratesThings
 
       def define_method_administrates_things(class_sym, options)
-        unless options[:remote]
-          define_method_administrates_things_local(class_sym, options)
-        else
-          define_method_administrates_things_remote(class_sym, options)
+        define_method("administrates_#{class_sym}?") do 
+          true
         end
       end
 

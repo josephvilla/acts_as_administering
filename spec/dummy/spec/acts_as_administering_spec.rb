@@ -6,52 +6,62 @@ describe "ActsAsAdminstering" do
     @organization = Organization.create
   end
 
-  describe "when included in the Person class using 'acts_as_administering :organizations':" do
+  describe "when included in the Person class using 'acts_as_administrating :organizations':" do
 
-    describe "#administer(administered_thing)" do
-      describe "when the administered_thing is @organization:" do
-        it "increases ActsAsRelating::Relationship.count by 1" do
-          expect{@person.administer @organization}.to change{ActsAsRelatingTo::Relationship.count}.by(1)
+    describe "#administrate_this_thing" do
+      describe "when the administrated_thing is @organization:" do
+        context "before the thing is added" do
+          it "increases ActsAsRelating::Relationship.count by 1" do
+            expect{@person.administrate_this_organization @organization}.to change{ActsAsRelatingTo::Relationship.count}.by(1)
+          end
+          it "returns true" do
+            expect(@person.administrate_this_organization @organization).to be_truthy
+          end
+          it "@person.administrated_organizations.count is 0" do
+            expect(@person.administrated_organizations.count).to eq(0)
+          end
         end
-        it "returns true" do
-          expect(@person.administer @organization).to be_truthy
-        end
-        it "@person.relates_to_as?(@organization,'admin') is true" do
-          @person.administer @organization
-          expect(@person.relates_to_as?(@organization,'admin')).to be_truthy
+        context "after the thing is added" do 
+          before(:each) do
+            @person.administrate_this_organization @organization
+          end
+          it "@person.relates_to_as?(@organization,'admin') is true" do
+            @person.administrate_this_organization @organization
+            expect(@person.relates_to_as?(@organization,'admin')).to be_truthy
+          end
+          it "@person.administered_organizations.count is 1" do
+            expect((@person.administrated_organizations).count).to eq(1)
+          end
+          it "@person.administered_organizations includes @organization" do
+            expect(@person.administrated_organizations).to include(@organization)
+          end
+          it "@person.administrates_this_organization?(@organization) is true" do 
+            expect(@person.administrates_this_organization?(@organization)).to be_truthy
+          end
         end
       end
-      describe "when the administered_thing is @program:" do
+      describe "when the administrated_thing is @program:" do
         it "raises 'NoMethodError'" do 
           @program = Program.create
-          expect{@person.administer @program}.to raise_error(NoMethodError)
+          expect{@person.administrate_this_program @program}.to raise_error(NoMethodError)
         end
       end
     end
-
-    describe "#administered [:things]" do
-      describe "before '@person.administer @organization:" do 
-        it "(person.administered :organizations).count is 0" do
-          expect((@person.administered :organizations).count).to eq(0)
-        end
+    describe "#administrated_things" do
+      describe "before '@person.administrate_this_organization @organization:" do 
       end
-      describe "after the #administer @organization call:" do
+      describe "after the #administrate @organization call:" do
         before(:each) do
-          @person.administer @organization
-        end
-        it "@administered_organizations.count is 1" do
-          expect((@person.administered :organizations).count).to eq(1)
-        end
-        it "@administered_organizations includes @organization" do
-          expect((@person.administered :organizations).include?(@organization)).to be_truthy
+          @person.administrate_this_organization @organization
         end
       end 
 
     end
+=begin
 
-    describe "#administered_things" do
+    xdescribe "#administered_things" do
       before(:each) do 
-        @person.administer @organization
+        @person.administrate @organization
       end
       describe "when 'things' is 'organizations'" do
         it "@person.administered_organizations includes @organization" do
@@ -65,18 +75,18 @@ describe "ActsAsAdminstering" do
       end
     end
 
-    describe "#administers?" do
-      it "returns false before the #administer call" do
+    xdescribe "#administers?" do
+      it "returns false before the #administrate call" do
         expect(@person.administers? @organization).to be_falsey
       end
-      it "returns true after the #administer call" do
-        @person.administer @organization
+      it "returns true after the #administrate call" do
+        @person.administrate @organization
         expect(@person.administers? @organization).to be_truthy
       end
 
     end
 
-    describe "#administers_[things]?" do
+    xdescribe "#administers_[things]?" do
       describe "when [things] is 'organizations'" do 
         it "responds to 'administers_organizations?'" do
           expect(@person.respond_to?("administers_organizations?")).to be_truthy
@@ -91,6 +101,6 @@ describe "ActsAsAdminstering" do
         end
       end
     end
-
+=end
   end
 end

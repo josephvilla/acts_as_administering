@@ -12,7 +12,10 @@ module ActsAsAdministering
 
         #define_method_administrated_thing_with class_sym
         [
-          "administrate_this_thing"
+          :administrate_this_thing,
+          :administrates_this_thing,
+          :administrates_things,
+          :stop_administrating_this_thing
         ].each do |method_key|
           send "define_method_#{method_key}#{location}", class_sym, options
         end

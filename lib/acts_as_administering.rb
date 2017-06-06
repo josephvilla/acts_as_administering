@@ -4,6 +4,7 @@ require "acts_as_administering/instance_methods"
 require "acts_as_administering/method_builders"
 require_dependency "acts_as_administering/define_methods"
 require_dependency "acts_as_administering/class_methods"
+require_dependency "acts_as_relating_to"
 
 module ActsAsAdministering
 

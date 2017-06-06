@@ -17,3 +17,7 @@ gemspec
 # gem 'byebug', group: [:development, :test]
 
 #gem 'acts_as_relating_to',     '~> 0.0.3',   git: 'git@github.com:josephvilla/acts_as_relating_to.git'
+
+group :development do 
+  gem 'guard-rspec', require: false
+end

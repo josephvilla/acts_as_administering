@@ -19,7 +19,7 @@ module ActsAsAdministering
         end
       end
 
-      private :define_method_administrates_this_thing_local
+      private :define_method_administrates_this_thing_remote
       
     end
   end

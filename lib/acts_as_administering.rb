@@ -9,7 +9,6 @@ require_dependency "acts_as_relating_to"
 module ActsAsAdministering
 
   def acts_as_administrating(*classes_array)
-    
     class_eval do
       include InstanceMethods
       extend  ClassMethods

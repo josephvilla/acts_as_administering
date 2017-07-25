@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency "acts-as-taggable-on",     "~> 3.4"
   s.add_dependency 'acts_as_relating_to',     '~> 0.0.4'
 
-  s.add_development_dependency "pg",          '~> 0.18'
+  s.add_development_dependency 'pg',          '0.20.0'
   s.add_development_dependency "rspec-rails", '~> 3.0'
 
 end

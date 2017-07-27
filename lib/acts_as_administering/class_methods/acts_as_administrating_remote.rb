@@ -8,14 +8,14 @@ module ActsAsAdministering
         define_create_remote_administrated_thing(class_sym, options)
 
         define_method("administrated_#{class_sym}_url") do
-          my_klass.url = "#{my_klass.app_provider.url}/#{my_object_name.pluralize}/#{self.id}/administrated/#{class_sym.to_s.pluralize}"
+          @url = "#{my_klass.app_provider.url.clone}/#{my_object_name.pluralize}/#{self.id}/administrated/#{class_sym.to_s.pluralize}"
           append_query("#{class_sym.to_s.singularize}")
         end
 
         define_method("administrated_#{class_sym.to_s}") do |**args|
-          my_klass.called_by = "administrated_#{class_sym.to_s}"
-          my_klass.query = args unless args.empty?
-          res = generic('get')
+          @called_by = "administrated_#{class_sym.to_s}"
+          @query = args unless args.empty?
+          res = generic('get').tap{|r| puts "#{self.class}.#{__method__}, r:"<<" #{r}".red}
           if res.is_a?(Array)
             return_klass = options[:class_name].constantize
             return_array = []

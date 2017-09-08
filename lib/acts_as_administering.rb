@@ -1,5 +1,5 @@
 require "acts_as_administering/engine"
-require "acts_as_administrated_by"
+require_dependency "acts_as_administrated_by"
 require "acts_as_administering/instance_methods"
 require "acts_as_administering/method_builders"
 require_dependency "acts_as_administering/define_methods"

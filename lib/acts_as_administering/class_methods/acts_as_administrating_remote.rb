@@ -15,7 +15,7 @@ module ActsAsAdministering
         define_method("administrated_#{class_sym.to_s}") do |**args|
           @called_by = "administrated_#{class_sym.to_s}"
           @query = args unless args.empty?
-          res = generic('get').tap{|r| puts "#{self.class}.#{__method__}, r:"<<" #{r}".red}
+          res = generic('get')
           if res.is_a?(Array)
             return_klass = options[:class_name].constantize
             return_array = []

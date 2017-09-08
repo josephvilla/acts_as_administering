@@ -1,8 +1,27 @@
 require 'acts_as_administrated_by/instance_methods'
 require 'acts_as_administrated_by/class_methods'
+require 'acts_as_administrated_by/define_methods'
 
 module ActsAsAdministratedBy
-  def acts_as_administrated
+
+  def acts_as_administrated_by(*classes_array)
+
+    class_eval do
+      include InstanceMethods
+      extend  ClassMethods
+      extend  DefineMethods
+    end
+
+    if is_array_of_keys? classes_array
+      acts_as_administrated_by_simple classes_array
+    else
+      acts_as_administrated_by_optioned classes_array
+    end
+
+
+  end
+
+  def acts_as_administrated(*classes_array)
     
     class_eval do
       include InstanceMethods
@@ -40,3 +59,5 @@ module ActsAsAdministratedBy
   end
 
 end
+
+ActiveRecord::Base.extend ActsAsAdministratedBy

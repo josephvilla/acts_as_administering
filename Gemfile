@@ -20,4 +20,6 @@ gemspec
 
 group :development do 
   gem 'guard-rspec', require: false
+  gem 'rspec-rails', '~> 3.4'
+  gem 'database_cleaner'
 end

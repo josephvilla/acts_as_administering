@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170606145453) do
+ActiveRecord::Schema.define(version: 20170711212824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,17 @@ ActiveRecord::Schema.define(version: 20170606145453) do
     t.integer  "hased_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "acts_as_relating_to_relationship_invitations", force: :cascade do |t|
+    t.integer  "sender_id"
+    t.string   "sender_type"
+    t.integer  "recipient_id"
+    t.string   "recipient_type"
+    t.integer  "status",         default: 0
+    t.integer  "role_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "acts_as_relating_to_relationships", force: :cascade do |t|
@@ -39,6 +50,7 @@ ActiveRecord::Schema.define(version: 20170606145453) do
     t.string   "display_name"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "reciprocal"
   end
 
   create_table "organizations", force: :cascade do |t|

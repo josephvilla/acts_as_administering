@@ -22,6 +22,9 @@ RSpec.describe Person do
       it "the person administrates the organization" do
         expect(person.administrates_this_organization?(organization)).to be_truthy
       end
+      it "the organization has the person as an administrator" do 
+        puts "organization.administrators:"<<" #{organization.administrators}".light_blue
+      end
       context "when trying to add the organization again" do 
         it "changes relationships by zero" do 
           expect{person.administrated_organizations << organization}.to change{ActsAsRelatingTo::Relationship.count}.by(0)

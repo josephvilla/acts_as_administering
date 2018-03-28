@@ -2,9 +2,7 @@ module ActsAsAdministratedBy
   module ClassMethods
     module ActsAsAdministratedByBase
 
-      def acts_as_administrated_by_base(class_sym, options)
-        puts "#{self}##{__method__}, class_sym:"<<" #{class_sym}".red
-        puts "#{self}##{__method__}, options:"<<" #{options}".light_blue
+      def acts_as_administrated_by_base(class_sym, options={})
         location = (options[:remote] ? "_remote" : "")
         [
           :administrators

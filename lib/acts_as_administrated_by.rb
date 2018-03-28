@@ -26,7 +26,9 @@ module ActsAsAdministratedBy
     class_eval do
       include InstanceMethods
       extend  ClassMethods
+      extend  DefineMethods
     end
+
 
     define_method("add_administrator_url") do 
       my_klass.url = "#{my_klass.app_provider.url}/#{my_object_name.pluralize}/#{self.id}/add_administrator/#{@person.id}"

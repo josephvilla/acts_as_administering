@@ -4,18 +4,24 @@ module ActsAsAdministering
 
       def define_method_administrates_this_thing_remote(class_sym, options)
         singular = class_sym.to_s.singularize
-=begin
         expected_class_name = options[:class_name] || singular.camelize
         expected_class = expected_class_name.constantize
-=end
+
+        define_method("administrates_this_#{singular}_url") do
+          @url = app_provider.uri.clone << '/api/' << api_version
+          @url << "/people/#{self.id}"
+          @url << "/administrates_this"
+          append_query
+        end
+
         define_method("administrates_this_#{singular}?") do |thing|
-          raise "not implemented!"
-=begin          
+          @called_by = "administrates_this_#{singular}"
+          @query = {thing_type: singular, singular => {id: thing.id}}
           if thing.is_a?(expected_class)
+            return generic('get')
           else
             raise "in #{my_klass}.#{__method__}, expected a #{expected_class_name}, but got a #{thing.class.name}"
           end
-=end          
         end
       end
 

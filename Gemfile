@@ -19,6 +19,7 @@ gemspec
 #gem 'acts_as_relating_to',     '~> 0.0.3',   git: 'git@github.com:josephvilla/acts_as_relating_to.git'
 
 group :development do 
+  #gem "rails", ">= 4.2"
   gem 'guard-rspec', require: false
   gem 'rspec-rails', '~> 3.4'
   gem 'database_cleaner'

@@ -7,22 +7,21 @@ module ActsAsAdministratedBy
 
         klass = (options[:class_name] || class_sym.to_s.singularize.camelize).constantize
 
-        puts "#{self.class}.#{__method__}, options:"<<" #{options}".red
-
         define_method(:administrators_url) do 
           @url = app_provider.uri.clone << '/api/' << api_version
-          @url = @url << "/#{collection_name}/#{self.id}/administrators"
+          @url = @url << "/#{collection_name}/#{self.id}/related_things?" << {things_type: class_sym, as: :admin}.to_query
         end
 
         define_method(:administrators) do 
           @called_by = __method__.to_s
-          generic('get').map{|item| klass.new(item)}
+          generic('get').
+            map{|item| klass.new(item)}
         end
 
       end
 
       private :define_method_administrators_remote
-      
+
     end
   end
 end

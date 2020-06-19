@@ -4,20 +4,24 @@ module ActsAsAdministering
 
       def define_method_stop_administrating_this_thing_remote(class_sym, options={})
         singular = class_sym.to_s.singularize
-        #expected_class_name = options[:class_name] || singular.camelize
-        #expected_class = expected_class_name.constantize
+        expected_class_name = options[:class_name] || singular.camelize
+        expected_class = expected_class_name.constantize
+
+        define_method("stop_administrating_this_#{singular}_url") do
+          @url = app_provider.uri.clone << '/api/' << api_version
+          @url << "/people/#{self.id}"
+          @url << "/administrated_thing/stop_administrating"
+          append_query
+        end
+
         define_method("stop_administrating_this_#{singular}") do |thing|
-          raise "not implemented!"
-=begin
+          @called_by = "stop_administrating_this_#{singular}"
+          @query = {thing_type: singular, singular => {id: thing.id}}
           if thing.is_a?(expected_class)
-            owned_relationships.where(in_relation_to: thing).tagged_with('admin').each do |relationship|
-              relationship.tag_list_on(:roles).remove('admin')
-              relationship.save!
-            end
+            generic('put')
           else
             raise "in #{my_klass}.#{__method__}, expected a #{expected_class_name}, but got a #{thing.class.name}"
           end
-=end
         end
       end
 

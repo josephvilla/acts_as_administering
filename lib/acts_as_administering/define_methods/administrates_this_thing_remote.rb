@@ -18,7 +18,7 @@ module ActsAsAdministering
           @called_by = "administrates_this_#{singular}"
           @query = {thing_type: singular, singular => {id: thing.id}}
           if thing.is_a?(expected_class)
-            return generic('get')
+            return generic('get').tap{|x| puts "in " << "#{self.class.name}.#{__method__}".white << ", " << "x: " << "#{x}".yellow}
           else
             raise "in #{my_klass}.#{__method__}, expected a #{expected_class_name}, but got a #{thing.class.name}"
           end
